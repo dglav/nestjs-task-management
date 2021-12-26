@@ -27,4 +27,13 @@ export class TasksService {
     this.tasks.push(task);
     return task;
   }
+
+  deleteTask(id: string): boolean {
+    const taskToDelete = this.getTaskById(id);
+    if (taskToDelete) {
+      this.tasks = this.tasks.filter((task) => task.id !== taskToDelete.id);
+      return true;
+    }
+    return false;
+  }
 }
