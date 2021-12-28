@@ -19,7 +19,6 @@ export class TasksController {
 
   @Get()
   getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
-    console.log({ filterDto });
     if (Object.keys(filterDto).length) {
       return this.TasksService.getFilteredTasks(filterDto);
     }
@@ -42,7 +41,6 @@ export class TasksController {
     @Param('id') id: string,
     @Body('status') status: TaskStatus,
   ) {
-    console.log({ id, status });
     return this.TasksService.updateTaskStatus(id, status);
   }
 
