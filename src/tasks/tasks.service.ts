@@ -6,7 +6,7 @@ import { TasksRepository } from './tasks.repository';
 // import { v4 as uuid } from 'uuid';
 import { CreateTaskDto } from './dto/create-task-dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status-dto';
-// import { GetTasksFilterDto } from './dto/get-tasks-filter-dto';
+import { GetTasksFilterDto } from './dto/get-tasks-filter-dto';
 
 @Injectable()
 export class TasksService {
@@ -14,26 +14,9 @@ export class TasksService {
     @InjectRepository(TasksRepository) private taskRepository: TasksRepository,
   ) {}
 
-  // getAllTasks(): Task[] {
-  //   return this.tasks;
-  // }
-  // getFilteredTasks(filterDto: GetTasksFilterDto): Task[] {
-  //   const { status, search } = filterDto;
-  //   let tasks = this.getAllTasks();
-  //   if (status) {
-  //     tasks = tasks.filter((task) => task.status === status);
-  //   }
-  //   if (search) {
-  //     tasks = tasks.filter((task) => {
-  //       const lowerCaseSearch = search.toLowerCase();
-  //       return (
-  //         task.title.toLowerCase().includes(lowerCaseSearch) ||
-  //         task.description.toLowerCase().includes(lowerCaseSearch)
-  //       );
-  //     });
-  //   }
-  //   return tasks;
-  // }
+  async getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
+    return this.taskRepository.getTasks(filterDto);
+  }
 
   async getTaskById(id: string): Promise<Task> {
     const found = await this.taskRepository.findOne(id);
